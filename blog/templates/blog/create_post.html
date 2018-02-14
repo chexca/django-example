@@ -2,14 +2,26 @@
 
 {% block content %}
 
+  {% if response_status == 'error' %}
+    <h3>{{ errors }}</h3>
+  {% endif %}
   <div>
-    <h4>{{ post.title }} - {{ post.author.username }}</h4>
-  </div>
-  <div>
-    <p>{{ post.text }}</p>
-  </div>
-  <div>
-    <p>{{ post.published_date }}</p>
+    <form method="POST">
+      {% csrf_token %}
+      <div>
+        {{ form.author.label_tag }}
+        {{ form.author }}
+      </div>
+      <div>
+        {{ form.title.label_tag }}
+        {{ form.title }}
+      </div>
+      <div>
+        {{ form.text.label_tag }}
+        {{ form.text }}
+      </div>
+      <button type="submit">Submit</button>
+    </form>
   </div>
 
 {% endblock %}

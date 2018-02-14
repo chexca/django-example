@@ -2,10 +2,21 @@
 
 {% block content %}
 
-  {% for post in posts %}
-    <div>
-      <a href="/post/{{ post.id }}/">{{ post.title }} - {{ post.author.username }}</a>
-    </div>
-  {% endfor %}
+  <div>
+    <h4>{{ post.title }} - {{ post.author.username }}</h4>
+  </div>
+  <div>
+    <p>{{ post.text }}</p>
+  </div>
+  <div>
+    {% if post.published_date %}
+      <p>{{ post.published_date }}</p>
+    {% else %}
+      <p>Post not published yet, <a href="/post/publish/{{ post.id }}/">Publish now!</a></p>
+    {% endif %}
+  </div>
+
+  <br>
+  <a href="/post/delete/{{ post.id }}/">Delete this post</a>
 
 {% endblock %}

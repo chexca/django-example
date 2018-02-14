@@ -1,10 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'blog/base.html' %}
+
+{% block content %}
+  <h3>Published posts:</h3>
+  {% for post in published_posts %}
+    <div>
+      <a href="/post/{{ post.id }}/">{{ post.title }} - {{ post.author.username }}</a>
+    </div>
+  {% endfor %}
+  <br>
+  <h4>Posts pending to be published:</h4>
+  {% for post in not_published_posts %}
+    <div>
+      <a href="/post/{{ post.id }}/">{{ post.title }} - {{ post.author.username }}</a>
+    </div>
+  {% endfor %}
+  <br>
+  <a href="/post/create/">Create new post</a>
+
+{% endblock %}
