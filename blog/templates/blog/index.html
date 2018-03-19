@@ -1,20 +1,27 @@
 {% extends 'blog/base.html' %}
+{% load static %}
 
 {% block content %}
   <h3>Published posts:</h3>
   {% for post in published_posts %}
-    <div>
-      <a href="/post/{{ post.id }}/">{{ post.title }} - {{ post.author.username }}</a>
+    <div class="js-post">
+      <a href="/post/{{ post.id }}/" data-toggle="tooltip" data-placement="right"
+         title="Published at: {{ post.published_date }}">{{ post.title }} - {{ post.author.username }}</a>
     </div>
   {% endfor %}
   <br>
   <h4>Posts pending to be published:</h4>
   {% for post in not_published_posts %}
-    <div>
-      <a href="/post/{{ post.id }}/">{{ post.title }} - {{ post.author.username }}</a>
+    <div class="js-post">
+      <a href="/post/{{ post.id }}/" data-toggle="tooltip" data-placement="right"
+         title="Created at: {{ post.created_date }}">{{ post.title }} - {{ post.author.username }}</a>
     </div>
   {% endfor %}
   <br>
   <a href="/post/create/">Create new post</a>
 
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'js/index.js' %}"></script>
 {% endblock %}
